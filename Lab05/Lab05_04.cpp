@@ -6,9 +6,12 @@ int main(){
     cin.tie(0);
     string n;
     cin >> n;
-    long long count = 0;
-    long long i = 0;
-    long long len = n.length();
+    int count = 0;
+    int i = 0;
+    int c = 0;
+    int row = 0;
+    int len = n.length();
+    char arr[1000];
     while (i < len){
         // cout << "i :" << i << endl; 
         // cout << "n[i] :" << n[i] << endl;
@@ -17,16 +20,29 @@ int main(){
         }
         if(i == 0){
             count += 1;
-            i++;
-        }
-        else if(n[i] > n[i-1]){
-            count += 1;
-            i++;
+            row++;
+            arr[i] = n[i];
         }
         else{
-            i++;
+            for (int j = 0; j < row; j++){
+                if(arr[j] >= n[i]){
+                    arr[j] = n[i];
+                    c++;
+                    break;
+                }
+            }
+            if (c != 1){
+                arr[row] = n[i];
+                row++;
+                count += 1;
+            }else
+                c = 0;
         }
+        i++;
+        // cout << "row :" << count<< endl;
+        // cout << "c :" << c << endl;
     }
     cout << count;
     return 0;
 }
+
