@@ -1,6 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void preprocess(int input[], int n) {
+    // initiating block pointer
+    int blk_idx = -1;
+    int minimum_block;
+    // calculating size of block
+    blk_sz = sqrt(n);
+    // building the decomposed array
+    for (int i=0; i<n; i++){
+        arr[i] = input[i];
+        if (i%blk_sz == 0){
+            // entering next block incementing block pointer
+            minimum_block = input[i];
+            blk_idx++;
+            block[blk_idx] = input[i];
+        }
+        if(minimum_block>input[i]){
+            block[blk_idx] = input[i];
+        }
+    }
+}
+
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
