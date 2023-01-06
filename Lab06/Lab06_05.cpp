@@ -1,38 +1,54 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool areEqual(int arr1[], int arr2[]){
- 
-    // Sort both arrays
-    sort(arr1, arr1 + 5);
-    sort(arr2, arr2 + 5);
- 
-    // Linearly compare elements
-    for (int i = 0; i < 5; i++)
-        if (arr1[i] != arr2[i])
-            return false;
- 
-    // If all elements were same.
-    return true;
-}
+
 
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
     int n;
+    string course;
     int result = 0;
-
+    int curr_result = 0;
     cin >> n;
+    vector<int> aKeys = {};
+    map<int,vector<string>> all_course = {};
+    map<int,string>::iterator it;
+    for(int i = 0; i < n; i++){
+        vector<string> stu_course = {};
+        aKeys.push_back(i);
+        for(int j = 0; j < 5; j++){
+            cin >> course;
+            stu_course.push_back(course);
+        }
+        sort(stu_course.begin(),stu_course.end());
+        all_course[aKeys[i]] = stu_course;
+    }
+    // for (const auto& pair : all_course) {
+    //     cout << "Student index: " << pair.first << endl;
+    //     cout << "Courses: ";
+    //     for (const auto& course : pair.second) {
+    //         cout << course << " ";
+    //     }
+    //     cout << endl;
+    // }
+    map<vector<string>, int> course_count;
+    for (const auto& pair : all_course) {
+        course_count[pair.second]++;
+    }
 
-   
-
-
-    if(result == 0){
+    int max_count = 0;
+    for (const auto& pair : course_count) {
+        max_count = max(max_count, pair.second);
+    }
+    if (max_count == 1){
         cout << n;
     }
     else{
-        cout << result;
+        cout << max_count;
     }
     return 0;
 
 }
+
+
